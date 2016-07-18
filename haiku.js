@@ -96,11 +96,11 @@ function createHaiku (arr){
 	for(var i = 0; i < arr[0].length; i++){
 		str1 += randomGen(obj[arr[0][i]]).slice(0,-1) + " "
 	}
-	for(var x = 0; x < arr[0].length; x++){
-		str2 += randomGen(obj[arr[0][x]]).slice(0,-1) + " "
+	for(var x = 0; x < arr[1].length; x++){
+		str2 += randomGen(obj[arr[1][x]]).slice(0,-1) + " "
 	}
-	for(var z = 0; z < arr[0].length; z++){
-		str3 += randomGen(obj[arr[0][z]]).slice(0,-1) + " "
+	for(var z = 0; z < arr[2].length; z++){
+		str3 += randomGen(obj[arr[2][z]]).slice(0,-1) + " "
 	}
 
 	return str1 + "\n" + str2 + "\n" + str3
@@ -110,7 +110,7 @@ function createHaiku (arr){
 
 
 
-console.log(createHaiku([[5],[7],[5]]))
+console.log(createHaiku([[2,3],[1,2,3,2],[1,1,2,1]]))
 
 
 

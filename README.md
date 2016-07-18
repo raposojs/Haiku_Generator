@@ -4,7 +4,7 @@ By Bruno Raposo
 
 ==============================================================================
 
-<u>What is Haiku?</u>
+What is Haiku?
 
 Haiku (俳句) (plural haiku) is a very short form of Japanese poetry. 
 
@@ -22,3 +22,34 @@ Modern Japanese haiku (現代俳句 gendai-haiku?) are increasingly unlikely to 
 to take nature as their subject, but the use of juxtaposition continues to be honored in both
 traditional and modern haiku. There is a common, although relatively recent, perception that the images
 juxtaposed must be directly observed everyday objects or occurrences.
+
+==============================================================================
+
+How to use program
+
+The "Haiku Generator" was written using JavaScript in conjunction with Node.js to make use of the I/O functionality. The I/O functionality was necessary to fetch data from the "library" (CMUDICT.txt).
+To generate your own Haiku, all that is necessary is to input an array as a property of the function createHaiku.
+
+For example:
+
+    createHaiku([[5],[7],[5]])
+
+        returns --> DIGUGLIELMO
+                    FEBRUARY
+                    PROMISCUITY
+
+    createHaiku([[2,3],[1,2,3,2],[1,1,2,1]])
+                   ^-5-----^-7-------^-5
+
+        returns --> CULTURE WARSHAUER
+                    BORTZ DOMINGUE CENTURIES WILDMAN
+                    GUNN FLIES KNIPPER BEARE
+
+Keep in mind that Haikus have a "5 - 7 - 5" syllable structure.
+
+==============================================================================
+
+
+If any bug/glitch is encountered, feel free to contact me!
+
+Enjoy!
