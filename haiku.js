@@ -122,7 +122,7 @@ function createHaiku (arr){
 
 
 
-//invoke createHaiku function using [[#],[#],[#]] format. # being the number of syables
+//invoke createHaiku function using [[#],[#],[#]] format. # being the number of syllables
 //in each word
 
 console.log(createHaiku([[5],[7],[5]]))
