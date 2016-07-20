@@ -4,25 +4,23 @@ var fs = require('fs')
 var dictionary = fs.readFileSync("CMUDICT.txt").toString().split("\n");
 
 //Arrays that will receive wordData's depending on number of syllables
-var more = [];
-var seven = [];
-var six = [];
-var five = [];
-var four = [];
-var three = [];
-var two = [];
-var one = [];
+var more = [],
+	seven = [],
+	six = [],
+	five = [],
+	four = [],
+	three = [],
+	two = [],
+	one = [];
 
 // temporary array used to drive info into correct arrays
 var tempArr = [];
 
-// array used to store MSC wordData's
-var idk = []
 
-
-// Placing word inside right array depending on number of syallables
+// Placing word inside right (one, two ... more) array depending on number of syallables
 function arraysBySylabNumber (){
 
+	//loop through each dictionary array
 	for(var i = 0; i < dictionary.length; i++){
 
 		// each array (wordData's) of the dictionary containing word and pronounciation
@@ -34,14 +32,14 @@ function arraysBySylabNumber (){
 		var word = wordData.split(" ")[0];
 
 
-		// remove (#) from word if existant
-		if(word.indexOf("(") >= 0|| word.indexOf("(") >= 0){
+		// remove "(#)" from word if existant
+		if(word.indexOf("(") >= 0){
 			word = word.slice(0,-3)
 		} else {
 			word
 		}
 
-		// place formatted word inside tempArr
+		// place formatted word inside tempArr as index[0]
 		tempArr.push(word);
 
 		// extracting # of sylabs
@@ -51,27 +49,26 @@ function arraysBySylabNumber (){
 
 		//place word data in correct array depending on the number of syallables
 
-		if (tempArr[1] > 7){
-			more.push(tempArr)
-		} else if ( tempArr[1] === 7){
-			seven.push(tempArr)
-		} else if (tempArr[1] === 6){
-			six.push(tempArr)
-		} else if (tempArr[1] === 5){
-			five.push(tempArr)
-		} else if (tempArr[1] === 4){
-			four.push(tempArr)
-		} else if (tempArr[1] === 3){
-			three.push(tempArr)
-		} else if (tempArr[1] === 2){
-			two.push(tempArr)
-		} else if (tempArr[1] === 1){
-			one.push(tempArr)
-		} else {
-			idk.push(tempArr)
+
+		switch (tempArr[1]){
+			case 7: seven.push(tempArr)
+			break;
+			case 6: six.push(tempArr)
+			break;
+			case 5: five.push(tempArr)
+			break;
+			case 4: four.push(tempArr)
+			break;
+			case 3: three.push(tempArr)
+			break;
+			case 2: two.push(tempArr)
+			break;
+			case 1: one.push(tempArr)
+			break;
+			default: more.push(tempArr)
 		}
 
-		//empty tempArr for next round in dictionary
+		// after pushing tempArr contents into their correct array, reset tempArr
 		tempArr = []	
 	}
 
@@ -102,27 +99,28 @@ function randomGen(arr){
 
 // function to concat strings into Haiku form
 function createHaiku (arr){
-	var str1 = "",
-	str2 = "",
-	str3 = "";
 
-	for(var i = 0; i < arr[0].length; i++){
-		str1 += randomGen(obj[arr[0][i]]).slice(0,-1) + " "
-	}
-	for(var x = 0; x < arr[1].length; x++){
-		str2 += randomGen(obj[arr[1][x]]).slice(0,-1) + " "
-	}
-	for(var z = 0; z < arr[2].length; z++){
-		str3 += randomGen(obj[arr[2][z]]).slice(0,-1) + " "
-	}
+	// string where haiku will be formed
+	var retStr = ""
 
-	return str1 + "\n" + str2 + "\n" + str3
+//Loop through array index's
+for(var y = 0; y < arr.length;y++){
 
+	//Loop through array of array's
+	for(var i = 0; i < arr[y].length; i++){
+		retStr += randomGen(obj[arr[y][i]]).slice(0,-1) + " "
+	}
+	
+	//skip a line after looping through array of array's
+	retStr += "\n"
+
+}
+	// return final string exluding extra "skip line"
+	return retStr.slice(0,-1)
 }
 
 
-
 //invoke createHaiku function using [[#],[#],[#]] format. # being the number of syllables
-//in each word
+//in each word for each line
 
-console.log(createHaiku([[5],[7],[5]]))
+console.log(createHaiku([[2,2,1],[1,5,1],[1,3,1]]))
